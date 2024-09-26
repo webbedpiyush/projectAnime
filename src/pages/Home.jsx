@@ -119,9 +119,9 @@ export default function Home() {
         </div>
         <div className="flex flex-col gap-4">
           <div className="text-xl font-bold py-3">TOP AIRING</div>
-          <HomeSideBar animeData={state.topAiring} />
+          <HomeSideBar animeData="topAiring" />
           <div className="text-xl font-bold py-3">UPCOMING {SEASON}</div>
-          <HomeSideBar animeData={state.Upcoming} />
+          <HomeSideBar animeData="upcoming" />
         </div>
       </div>
     </div>
