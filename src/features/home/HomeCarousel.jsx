@@ -74,7 +74,7 @@ export default function HomeCarousel() {
           }}
           grabCursor={true}
           centeredSlides={true}
-          className="relative max-w-full w-full h-96 sm:h-80 rounded-lg cursor-grab"
+          className="relative max-w-full w-[100%] h-96 sm:h-80 rounded-lg cursor-grab"
         >
           {validData.map(
             ({
