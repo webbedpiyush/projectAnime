@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useRef } from "react";
 import { FaCircle, FaPlay } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -26,22 +26,33 @@ function calculateSlidesPerView(windowWidth) {
 
 export default function EpisodeCard() {
   const [watchedEpisodesData, setWatchedEpisodesData] = useState(
-    localStorage.getItem("watched-episodes")
+    localStorage.getItem("watched-episodes") || "{}" // Default to empty object if null
   );
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const resizeTimeout = useRef(null); // Ref to store timeout ID
 
   const lastVisitedData = useMemo(() => {
     const data = localStorage.getItem(LOCAL_STORAGE_KEYS.LAST_ANIME_VISITED);
     return data ? JSON.parse(data) : {};
   }, []);
-  useEffect(function () {
+
+  useEffect(() => {
     function handleResize() {
-      setWindowWidth(window.innerWidth);
+      if (resizeTimeout.current) {
+        clearTimeout(resizeTimeout.current); // Clear previous timeout
+      }
+
+      resizeTimeout.current = setTimeout(() => {
+        setWindowWidth(window.innerWidth);
+      }, 200);
     }
-    const debouncedResize = setTimeout(handleResize, 200);
+
     window.addEventListener("resize", handleResize);
-    return function () {
-      clearTimeout(debouncedResize);
+
+    return () => {
+      if (resizeTimeout.current) {
+        clearTimeout(resizeTimeout.current); // Clean up on unmount
+      }
       window.removeEventListener("resize", handleResize);
     };
   }, []);
@@ -77,13 +88,11 @@ export default function EpisodeCard() {
         const playbackPercentage =
           playbackInfo[episode.id]?.playbackPercentage || 0;
 
-        // Determine anime title, preferring English, falling back to Romaji, then to empty string
         const animeTitle =
           lastVisitedData[animeId]?.titleEnglish ||
           lastVisitedData[animeId]?.titleRomaji ||
           "";
 
-        // Conditional title display
         const displayTitle = `${animeTitle}${
           episode.title ? ` - ${episode.title}` : ""
         }`;
