@@ -267,19 +267,20 @@ export default function Navbar() {
             {!isMobileView && (
               <div
                 className={`flex flex-1 max-w-[35rem] h-[1.2rem] items-center p-[0.6rem] rounded-[0.3rem] bg-[#333] animate-[fadeIn_0.1s_ease-in-out] md:max-w-[30rem] max-w-[100%] mt-[1rem] ${
-                  isInputVisible ? "flex" : "none"
+                  isInputVisible ? "flex" : "hidden"
                 }`}
                 ref={inputContainer}
               >
                 <div
-                  className={`m-0 py-0 px-[0.25rem] text-[#333] ${
+                  className={`m-0 py-0 px-[0.25rem] text-[#fff] ${
                     search.isSearchFocused ? "opacity-100" : "opacity-50"
                   } text-[1.2rem] max-h-[100%] flex items-center`}
                 >
                   <IoIosSearch />
                 </div>
+
                 <input
-                  className="bg-transparent border-none text-[#333] inline-block text-[0.85rem] outline-0 p-0 max-h-[100%] flex items-center pt-0 w-[100%] transition duration-[200] ease-in-out"
+                  className="bg-transparent border-none text-[#fff] inline-block text-[0.85rem] outline-0 p-0 max-h-[100%] flex items-center pt-0 w-[100%] transition duration-[200] ease-in-out"
                   type="text"
                   placeholder="Search Anime"
                   value={search.searchQuery}
@@ -294,6 +295,7 @@ export default function Navbar() {
                   }}
                   ref={inputRef}
                 />
+
                 <DropDownSearch
                   searchResults={searchResults}
                   onClose={handleCloseDropdown}
@@ -313,13 +315,13 @@ export default function Navbar() {
                 >
                   <FiX />
                 </button>
-                <div
+                {/* <div
                   className={`m-0 py-0 px-[0.25rem] text-[#333] ${
                     search.isSearchFocused ? "opacity-100" : "opacity-50"
                   } text-[1.2rem] max-h-[100%] flex items-center`}
                 >
                   <GoCommandPalette />
-                </div>
+                </div> */}
               </div>
             )}
             <div className="flex items-center h-[2rem] gap-[0.5rem]">

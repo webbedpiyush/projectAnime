@@ -7,6 +7,7 @@ import StatusIndicator from "../../ui/StatusIndicator";
 import { TbCards } from "react-icons/tb";
 
 export default function CardItem({ anime }) {
+  // console.log(anime)
   const [loading, setLoading] = useState(true);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -32,6 +33,7 @@ export default function CardItem({ anime }) {
   }
 
   const imageSrc = anime.image || "";
+  console.log(imageSrc)
   const animeColor = anime.color || "#999999";
 
   const displayTitle = useMemo(
