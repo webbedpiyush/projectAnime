@@ -1,5 +1,6 @@
 .embla {
-  max-width: 1650px; /* Default max-width */
+  max-width: 1650px;
+  /* Default max-width */
   margin: auto;
   --slide-height: 20rem;
   --slide-spacing: 1rem;
@@ -8,14 +9,17 @@
 
 @media (max-width: 1250px) {
   .embla {
-    max-width: 80%; /* Adjust for larger tablets/small desktops */
+    max-width: 80%;
+    /* Adjust for larger tablets/small desktops */
   }
 }
 
 @media (max-width: 768px) {
   .embla {
-    max-width: 100%; /* Full width for tablets and smaller devices */
-    --slide-height: 15rem; /* Optional: adjust slide height */
+    max-width: 100%;
+    /* Full width for tablets and smaller devices */
+    --slide-height: 15rem;
+    /* Optional: adjust slide height */
   }
 }
 
@@ -49,44 +53,39 @@
   user-select: none;
   width: 100%; /* Full width of the slide */
   overflow: hidden; /* Prevent overflow */
+  background-image: linear-gradient(180deg,
+      rgba(0, 0, 0, 0.7) 0%,
+      transparent 100%);
 }
 
-
-.embla__controls {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  justify-content: space-between;
-  gap: 1.2rem;
-  margin-top: 1.8rem;
-}
-
-.embla__buttons {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.6rem;
-  align-items: center;
-}
 
 .embla__button-container {
   position: absolute;
-  top: 10px; /* Adjust position */
-  right: 10px; /* Adjust position */
+  top: 10px;
+  /* Adjust position */
+  right: 10px;
+  /* Adjust position */
   display: flex;
-  flex-direction: row; /* Change to row for horizontal layout */
-  gap: 0.5rem; /* Space between buttons */
-  z-index: 10; /* Ensure buttons are on top */
+  flex-direction: row;
+  /* Change to row for horizontal layout */
+  gap: 0.5rem;
+  /* Space between buttons */
+  z-index: 10;
+  /* Ensure buttons are on top */
 }
 
-
 .embla__button {
-  background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent background */
-  border-radius: 50%;
+  background-color: rgba(36, 48, 68, 0.587);
+  opacity: 40;
+  /* Semi-transparent background */
+  border-radius: 20%;
   width: 2.6rem;
   height: 2.6rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  backdrop-filter: blur(5px); /* Apply blur effect */
+  backdrop-filter: blur(5px);
+  /* Apply blur effect */
   transition: background-color 0.3s;
 }
 

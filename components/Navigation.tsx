@@ -43,7 +43,7 @@ export default function Navigation() {
       </nav>
 
       {/* Bottom navigation for mobile */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0">
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white dark:bg-black z-10 border-t-2 border-gray-200 dark:border-gray-700">
         <div className="flex justify-around">
           {navItems.slice(0, 5).map((item) => (
             <Link
@@ -61,7 +61,7 @@ export default function Navigation() {
       </nav>
 
       {/* Spacer for content on mobile */}
-      <div className="h-16 md:hidden"></div>
+      <div className="h-16 md:hidden "></div>
     </>
   );
 }
