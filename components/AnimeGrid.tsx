@@ -5,8 +5,17 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import SkeletonCard from "@/components/SkeletonCard";
 
-export function AnimeGrid({ selectedTab }: { selectedTab: string }) {
-  const [animes, setAnimes] = useState([]);
+export function AnimeGrid({
+  selectedTab,
+  currentPage,
+  animes,
+  setAnimes,
+}: {
+  selectedTab: string;
+  currentPage: number;
+  animes: string[];
+  setAnimes: () => void;
+}) {
   const [isLoading, setIsLoading] = useState(true);
 
   // Dynamically set searchQuery based on selectedTab
@@ -31,9 +40,10 @@ export function AnimeGrid({ selectedTab }: { selectedTab: string }) {
     try {
       setIsLoading(true);
       const { data } = await axios.get(url, {
-        params: { page: 1, perPage: 30, provider: "zoro" },
+        params: { page: currentPage, perPage: 15, provider: "zoro" },
       });
-      console.log(data.results);
+      // console.log(data.results);
+      console.log(currentPage);
       setAnimes(data.results);
     } catch (error: any) {
       throw new Error(error.message);
@@ -45,7 +55,7 @@ export function AnimeGrid({ selectedTab }: { selectedTab: string }) {
   // Fetch data when selectedTab changes
   useEffect(() => {
     fetch();
-  }, [selectedTab]);
+  }, [selectedTab, currentPage]);
 
   // Return JSX
   return (
@@ -56,19 +66,23 @@ export function AnimeGrid({ selectedTab }: { selectedTab: string }) {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 p-4">
           {animes.length > 0 &&
             animes.map((anime, index) => (
-              <Card key={index} className="overflow-hidden">
+              <Card key={index} className="overflow-hidden lg:w-[180px]">
                 <CardContent className="p-0">
                   <div className="relative">
                     <img
                       src={anime.image}
-                      className="object-cover w-full h-full"
+                      className="object-cover w-full h-full "
                       alt={`Slide ${index + 1}`}
                       style={{
-                        position: "relative",
+                        width: "100%", // Ensures the image fills the card
+                        height: "250px", // Adjusted height to match the reduced width
+                        objectFit: "cover",
                       }}
                     />
                     <Badge className="absolute bottom-2 right-2 bg-primary text-primary-foreground">
-                      EP {anime.totalEpisodes}
+                      {anime.type === "TV"
+                        ? `EP ${anime.totalEpisodes}`
+                        : anime.type}
                     </Badge>
                   </div>
                   <h3 className="p-2 text-sm font-medium truncate">
